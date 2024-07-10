@@ -16,13 +16,12 @@ export default function Navibar() {
                         <Nav.Link><Link className="nav-item nav-link" to="/users">Users</Link></Nav.Link>
                         <Nav.Link><Link className="nav-item nav-link" to="/about">About</Link></Nav.Link>
                         <Nav.Link><Link className="nav-item nav-link" to="/map">Map</Link></Nav.Link>
+                        <Nav className="ml-auto">
+                            <Button variant="primary" className="mr-2"> Log in</Button>
+                            <Button variant="primary">Sign in</Button>
+                        </Nav>
                     </Nav>
-
                 </Navbar.Collapse>
-                <Nav className="mr-auto p-2">
-                        <Button variant="primary" className="mr-2"> Log in</Button>
-                        <Button variant="primary">Sign in</Button>
-                    </Nav>
             </Navbar>
         </>
     )

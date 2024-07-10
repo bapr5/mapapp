@@ -18,7 +18,7 @@ import ErrorPage from './pages/ErrorPage';
 
 function App() {
 
-  return (<>
+  return (
     <BrowserRouter>
       <Navibar></Navibar>
       <Routes>
@@ -31,7 +31,6 @@ function App() {
         <Route path='*' element={<ErrorPage/>}> </Route>
       </Routes>
     </BrowserRouter>
-  </>
   );
 }
 //   const [identifier,setContent] = useState('1')
