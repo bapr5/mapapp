@@ -12,7 +12,7 @@ import Navibar from './components/Navibar';
 import Home from './pages/Home';
 import About from './pages/About';
 import MapPage from './pages/MapPage';
-import Users from './pages/Users';
+import Users from './pages/Users.tsx';
 import ErrorPage from './pages/ErrorPage';
 // import { Home, About, MapPage, Users } from './pages';
 
