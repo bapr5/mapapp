@@ -3,21 +3,22 @@ const Sequelize = require('sequelize')
 
 module.exports = function (sequelize) {
     return sequelize.define("users", {
-        id : {
+        id: {
             type: Sequelize.INTEGER,
-            primaryKey:true
+            primaryKey: true
         },
-        name : {
+        name: {
             type: Sequelize.STRING(225),
         },
-        email : {
+        email: {
             type: Sequelize.STRING(225),
         },
-        phone : {
+        phone: {
             type: Sequelize.STRING(225),
-        }},{
-            timestamps: false,
-            tableName:'cars'
-        })
+        }
+    }, {
+        timestamps: false,
+        tableName: 'cars'
+    })
 
 }
