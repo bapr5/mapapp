@@ -33,36 +33,6 @@ function App() {
     </BrowserRouter>
   );
 }
-//   const [identifier,setContent] = useState('1')
 
-
-
-//   function handleClick(text){
-//     console.log(text)
-//     setContent(text)
-//   }
-//   return (
-//     <div className="App"> 
-//     <Header>   </Header>
-//     <YMaps>
-//     <div>
-//       My awesome application with maps!
-//       <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} />
-//     </div>
-//   </YMaps>
-//     {/* <Button isActive={identifier===1} onClick={()=>handleClick(1)}>It should print 1</Button>
-//     <Button isActive={identifier===2} onClick={()=>handleClick(2)}>It should print 2</Button> */}
-//     <p>{identifier}</p>
-//     </div>
-//   );
-// }
-// const App = () => (
-//   <YMaps>
-//     <div>
-//       My awesome application with maps!
-//       <Map defaultState={{ center: [55.75, 37.57], zoom: 7 }} />
-//     </div>
-//   </YMaps>
-// );
 
 export default App;

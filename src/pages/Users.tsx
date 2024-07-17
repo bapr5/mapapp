@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Form, Row, Col } from 'react-bootstrap'
 
 import { useForm, SubmitHandler} from 'react-hook-form'
+import UsersTable from '../components/UsersTable';
 
 interface UsersForm {
     name: string;
@@ -44,6 +45,8 @@ export default function Users() {
                     <button>Search</button>
                 </Row>
             </Container>
+
+            <UsersTable></UsersTable>
             </form>
         </>
     )
