@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Table } from 'react-bootstrap'
 
-export default function UsersTable() {
+export default function UsersTable(props) {
 // useEffect(()=> {})
 
 // useEffect(() => {
@@ -9,7 +9,7 @@ export default function UsersTable() {
         
 //     }
 // })
-
+ const {items} = props;
   return (
     <Table>
         <thead>
@@ -21,7 +21,13 @@ export default function UsersTable() {
             </tr>
         </thead>
         <tbody>
+          {
+          items.forEach(element => {
+            console.log(element)
+            
+          })
 
+        }
         </tbody>
     </Table>
   )
