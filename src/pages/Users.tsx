@@ -4,7 +4,9 @@ import { Container, Form, Row, Col, Button } from 'react-bootstrap'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import UsersTable from '../components/UsersTable';
 
-import axios from 'axios';
+// import axios from 'axios';
+
+import {query_items} from '../api'
 
 interface UsersForm {
     name: string;
@@ -22,22 +24,22 @@ export default function Users() {
     };
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        fetchResults();
+        query_items(0,5);
     };
-    const fetchResults = async () => {
-        try {
-            const response = await axios.get('127.0.0.1:3333', {
-                params: { q: query },
-            });
-            setResults(response.data.results);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+    // const fetchResults = async () => {
+    //     try {
+    //         const response = await axios.get('127.0.0.1:3333', {
+    //             params: { q: query },
+    //         });
+    //         setResults(response.data.results);
+    //     } catch (error) {
+    //         console.error('Error fetching data:', error);
+    //     }
+    // };
 
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
-
+    const [items, setItems] = useState([])
     // const { register, handleSubmit } = useForm<UsersForm>({
     //     defaultValues: {
 
@@ -86,7 +88,7 @@ export default function Users() {
                     </Row>
                 </Container>
 
-                <UsersTable items={[1, 2, 3]} ></UsersTable>
+                <UsersTable items={[1,2,3,4]} ></UsersTable>
             </form>
         </>
     )
