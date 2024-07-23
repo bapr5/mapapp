@@ -4,58 +4,58 @@ import { Container, Form, Row, Col, Button } from 'react-bootstrap'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import UsersTable from '../components/UsersTable';
 
+import axios from 'axios';
+
 // import axios from 'axios';
 
-import {query_items} from '../api'
+import { query_items } from '../api'
 
-interface UsersForm {
-    name: string;
-    email: number;
-    id: number;
-    phone: string;
-}
+const API_URL = "http://127.0.0.1:3333/users"
+
+// interface UsersForm {
+//     name: string;
+//     email: number;
+//     id: number;
+//     phone: string;
+// }
 
 
 
 export default function Users() {
 
+    async function doQuery(myfrom = 0, mylimit = 10) {
+        return axios.get( API_URL, {
+            params:{
+                from: myfrom,
+                limit: mylimit
+            }
+        })
+    }
+    
+
+    // .then(data => {setItems(data['data'])})
+
+    window.onload = function(){
+        (doQuery().then(data => {setItems(data['data'])}))
+    }
+
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
+    const [items, setItems] = useState([{}])
+    const [currentCount,setCount] = useState(0)
+
     const handleInputChange = (event) => {
         setQuery(event.target.value);
     };
     const handleFormSubmit = (event) => {
+        doQuery().then(data => {setItems(data['data'])})
         event.preventDefault();
-        query_items(0,5);
     };
-    // const fetchResults = async () => {
-    //     try {
-    //         const response = await axios.get('127.0.0.1:3333', {
-    //             params: { q: query },
-    //         });
-    //         setResults(response.data.results);
-    //     } catch (error) {
-    //         console.error('Error fetching data:', error);
-    //     }
-    // };
 
-    const [query, setQuery] = useState('');
-    const [results, setResults] = useState([]);
-    const [items, setItems] = useState([])
-    // const { register, handleSubmit } = useForm<UsersForm>({
-    //     defaultValues: {
-
-    //     },
-    // })
-
-    // const onSubmit:SubmitHandler<IUserFields> = ({data}) => {}
-
-
-    // const submit: SubmitHandler<UsersForm> = data => {
-    //     console.log(data)
-    // }
-
-
-
-
+    function switchPage(page){
+        doQuery(page*10,10).then(data => {setItems(data['data'])})
+        setCount(page)
+    }
 
     return (
         <>
@@ -63,32 +63,23 @@ export default function Users() {
             <form onSubmit={handleFormSubmit}>
 
                 <Container>
-                    {/* <Row>
-                    <Col> <Form.Control type="email" {...register('email', {})} placeholder="Enter email" /></Col>
-                    <Col>  <Form.Control type="phone" {...register('phone', {})} placeholder="Enter phone" /></Col>
-                </Row>
-                <Row>
-                    <Col> <Form.Control type="name" {...register('name', {})} placeholder="Enter full name" /></Col>
-                    <Col>  <Form.Control type="id" {...register('id', {})} placeholder="Enter user ID" /></Col>
-                </Row>
-                <Row>
-                    <button>Search</button>
-                </Row> */}
                     <Row>
                         <Col>
-                        <Form.Control type="text" value={query} onChange={handleInputChange} placeholder="Enter query" />
+                            <Form.Control type="text" value={query} onChange={handleInputChange} placeholder="Enter query" />
                         </Col>
                         <Col>
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button></Col>
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
+                        </Col>
                     </Row>
                     <Row>
-                        {/* <button>Search</button> */}
                     </Row>
                 </Container>
-
-                <UsersTable items={[1,2,3,4]} ></UsersTable>
+                <UsersTable items={items} ></UsersTable>
+                <button onClick={() => switchPage(currentCount-1)}>направо</button>
+                {currentCount}
+                <button onClick={() => switchPage(currentCount+1)}>направо</button>
             </form>
         </>
     )
