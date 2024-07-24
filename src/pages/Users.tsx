@@ -11,15 +11,7 @@ import axios from 'axios';
 import { query_items } from '../api'
 
 const API_URL = "http://127.0.0.1:3333/users"
-
-// interface UsersForm {
-//     name: string;
-//     email: number;
-//     id: number;
-//     phone: string;
-// }
-
-
+const SEARCH_URL = "http://127.0.0.1:3333/search_string" //переделать
 
 export default function Users() {
 
@@ -31,9 +23,16 @@ export default function Users() {
             }
         })
     }
-    
 
-    // .then(data => {setItems(data['data'])})
+    //и это г тоже переделать
+
+    async function searchString(q) {
+        return axios.get( API_URL, {
+            
+        })
+    }
+    
+    
 
     window.onload = function(){
         (doQuery().then(data => {setItems(data['data'])}))
