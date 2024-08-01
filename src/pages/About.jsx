@@ -10,13 +10,19 @@ function onButton() {
   socket.emit("hi");
   console.log("hi");
 }
+
+function ChangeRoom(targetroom){
+  
+  console.log("changing room to :",targetroom)
+  // selectRoom(2)
+  socket.emit('joinroom',targetroom)
+}
+
 export default function About() {
+  const [room,selectRoom]= useState(1);
   const [connections, setConnections] = useState([])
   const [socketStatus, setSocketStatus] = useState(socket.connected);
   useEffect(() => {
-
-
-
     function onConnect() {
       setSocketStatus(true);
     }
@@ -28,6 +34,11 @@ export default function About() {
       console.log(socket.id)
       onConnect()
     })
+
+    socket.on("global hi", ()=>{
+      console.log("global event recieved.")
+    })
+
     socket.on('disconnect', onDisconnect);
     socket.on('number', (number) => {
       console.log(number)
@@ -39,13 +50,30 @@ export default function About() {
   }, []);
   return (
     <>
+
       <div>
+      
         <ConnectionState isConnected={ConnectionState} />
       </div>
       <div>
-        <button onClick={() => {  onButton(); }}>Нажми меня</button>
+
+        <button onClick={() => {  onButton(); }}>click me</button>
+        <button onClick={() => {  socket.emit("global"); console.log("global event button pressed") }}>global event</button>
         <i>{connections}</i>
+        <b>{socketStatus}</b>
+        </div>
+        <div>
+        Комнаты
+        <button onClick={()=>{ChangeRoom(1);
+          selectRoom(1)
+        }
+        }>1</button>
+        <button onClick={()=>{ChangeRoom(2);
+          selectRoom(2)}
+        }>2</button>
+        
       </div>
+      <i>{room}</i>
     </>
   )
 }
